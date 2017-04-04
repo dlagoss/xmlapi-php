@@ -2332,6 +2332,20 @@ class xmlapi
         return $this->api1_query($username, 'Email', 'addpop', $args);
     }
 
+    // This API1 function REMOVE a emailaccount for a specific user.
+    public function delpop($username, $args)
+    {
+        if (!isset($username) || !isset($args)) {
+            error_log("delpop requires that a user and args are passed to it");
+            return false;
+        }
+        if (is_array($args) && (sizeof($args) < 2)) {
+            error_log("delpop requires that args at least contains an 'emailaccount as $arg[0]', 'domain as $arg[2]'");
+            return false;
+        }
+        return $this->api1_query($username, 'Email', 'delpop', $args);
+    }
+
     // This API function parks a domain onto this user's account
     public function park($username, $newdomain, $topdomain)
     {
